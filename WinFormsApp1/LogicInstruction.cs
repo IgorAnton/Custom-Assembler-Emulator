@@ -24,21 +24,8 @@ namespace WinFormsApp1
 
             if (ops.Length == 1 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
+                int OP1 = Config.getReg(ops[0]);
 
-                    int regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-
-                }
-                else
-                {
-                    //TODO: ERROR
-
-                }
                 int tmp1 = Config.ACC;
                 int tmp2 = OP1;
 
@@ -48,9 +35,7 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 & tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
@@ -58,47 +43,26 @@ namespace WinFormsApp1
 
                 if (Config.ACC < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
                     Config.ACC = 0;
                 }
-                else if(Config.ACC > 0){
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                if (Config.ACC > 0)
+                {
+                    Config.setGREATER();
                 }
 
             }
             else if (ops.Length == 2 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
+                int OP1 = 0, OP2 = 0; ;
 
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
 
-                int tmp1 = Config.registers[regNum];
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[0]);
+
+                int tmp1 = OP2;
                 int tmp2 = OP1;
 
 
@@ -106,104 +70,62 @@ namespace WinFormsApp1
                 {
                     Config.NZCV |= 1;
                 }
-                if ((tmp1 & tmp2) == 0)
+                else if ((tmp1 & tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (Config.registers[regNum] & OP1) % 65536;
-                if (Config.registers[regNum] < 0)
+
+                Config.setReg(ops[0], (OP2 & OP1) % 65536);
+
+                if (Config.getReg(ops[0]) < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
-                    Config.registers[regNum] = 0;
-
+                    Config.setReg(ops[0], 0);
 
                 }
-                else if(Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
+
+
             }
             else if (ops.Length == 3 && args != "")
             {
                 int OP1 = 0, OP2 = 0;
-                string op;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
 
-                if (ops[2][0] == 'R')
-                {
-                    op = ops[2].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
-
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[2]);
 
                 int tmp1 = OP1;
                 int tmp2 = OP2;
-                
+
                 if ((tmp1 & tmp2) > 65535)
                 {
                     Config.NZCV |= 1;
                 }
                 if ((tmp1 & tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (OP1 & OP2) % 65536;
+                Config.setReg(ops[0], (OP1 & OP2) % 65536);
 
-                if (Config.registers[regNum] < 0)
+                if (Config.getReg(ops[0]) < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
-                    Config.registers[regNum] = 0;
+                    Config.setReg(ops[0], 0);
                 }
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
 
@@ -212,7 +134,7 @@ namespace WinFormsApp1
             {
                 if (Config.USER_STACK - Config.USER_STACK_BASE >= 2)
                 {
-                    //ACC = OP2 + OP1
+
                     int OP2 = Config.memory[--Config.USER_STACK];
                     int OP1 = Config.memory[--Config.USER_STACK];
                     int tmp1 = OP1;
@@ -223,32 +145,28 @@ namespace WinFormsApp1
                     }
                     if ((tmp1 & tmp2) == 0)
                     {
-                        Config.EQUAL = true;
-                        Config.LESS = false;
-                        Config.GREATER = false;
+                        Config.setEQAUL();
 
                         Config.NZCV |= 4;
                     }
 
 
                     Config.ACC = (OP2 & OP1) % 65536;
+
                     if (Config.ACC < 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = true;
-                        Config.GREATER = false;
+                        Config.setLESS();
                         Config.ACC = 0;
                     }
                     if (Config.ACC > 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = false;
-                        Config.GREATER = true;
-                    }
+                        Config.setGREATER();
 
+                    }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
+
         }
 
         public static void OR(string args)
@@ -257,23 +175,11 @@ namespace WinFormsApp1
             if (ops.Length > 0)
                 trimOps(ref ops);
 
+
             if (ops.Length == 1 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
+                int OP1 = Config.getReg(ops[0]);
 
-                    int regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-
-                }
-                else
-                {
-                    //TODO: ERROR
-
-                }
                 int tmp1 = Config.ACC;
                 int tmp2 = OP1;
 
@@ -283,9 +189,7 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 | tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
@@ -293,50 +197,26 @@ namespace WinFormsApp1
 
                 if (Config.ACC < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
                     Config.ACC = 0;
                 }
                 if (Config.ACC > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-
-                    
+                    Config.setGREATER();
                 }
 
             }
             else if (ops.Length == 2 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
+                int OP1 = 0, OP2 = 0; ;
 
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
 
-                int tmp1 = Config.registers[regNum];
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[0]);
+
+                int tmp1 = OP2;
                 int tmp2 = OP1;
 
 
@@ -344,74 +224,38 @@ namespace WinFormsApp1
                 {
                     Config.NZCV |= 1;
                 }
-                if ((tmp1 | tmp2) == 0)
+                else if ((tmp1 | tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (Config.registers[regNum] | OP1) % 65536;
-                if (Config.registers[regNum] < 0)
-                {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
 
-                    Config.registers[regNum] = 0;
+                Config.setReg(ops[0], (OP2 | OP1) % 65536);
+
+                if (Config.getReg(ops[0]) < 0)
+                {
+                    Config.setEQAUL();
+
+                    Config.setReg(ops[0], 0);
 
 
                 }
-                if (Config.ACC > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
+
 
             }
             else if (ops.Length == 3 && args != "")
             {
                 int OP1 = 0, OP2 = 0;
-                string op;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
 
-                if (ops[2][0] == 'R')
-                {
-                    op = ops[2].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
-
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[2]);
 
                 int tmp1 = OP1;
                 int tmp2 = OP2;
@@ -422,27 +266,22 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 | tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (OP1 | OP2) % 65536;
+                Config.setReg(ops[0], (OP1 | OP2) % 65536);
 
-                if (Config.registers[regNum] < 0)
+                if (Config.getReg(ops[0]) < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
-                    Config.registers[regNum] = 0;
+                    Config.setReg(ops[0], 0);
                 }
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
+
                 }
 
             }
@@ -450,7 +289,7 @@ namespace WinFormsApp1
             {
                 if (Config.USER_STACK - Config.USER_STACK_BASE >= 2)
                 {
-                    //ACC = OP2 + OP1
+
                     int OP2 = Config.memory[--Config.USER_STACK];
                     int OP1 = Config.memory[--Config.USER_STACK];
                     int tmp1 = OP1;
@@ -461,27 +300,23 @@ namespace WinFormsApp1
                     }
                     if ((tmp1 | tmp2) == 0)
                     {
-                        Config.EQUAL = true;
-                        Config.LESS = false;
-                        Config.GREATER = false;
+                        Config.setEQAUL();
 
                         Config.NZCV |= 4;
                     }
 
 
                     Config.ACC = (OP2 | OP1) % 65536;
+
                     if (Config.ACC < 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = true;
-                        Config.GREATER = false;
+                        Config.setLESS();
                         Config.ACC = 0;
                     }
                     if (Config.ACC > 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = false;
-                        Config.GREATER = true;
+                        Config.setGREATER();
+
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
@@ -496,23 +331,12 @@ namespace WinFormsApp1
             if (ops.Length > 0)
                 trimOps(ref ops);
 
+            
+
             if (ops.Length == 1 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
+                int OP1 = Config.getReg(ops[0]);
 
-                    int regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-
-                }
-                else
-                {
-                    //TODO: ERROR
-
-                }
                 int tmp1 = Config.ACC;
                 int tmp2 = OP1;
 
@@ -522,9 +346,7 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 ^ tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
@@ -532,49 +354,26 @@ namespace WinFormsApp1
 
                 if (Config.ACC < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
                     Config.ACC = 0;
                 }
-
                 if (Config.ACC > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-
+                    Config.setGREATER();
                 }
+
             }
             else if (ops.Length == 2 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
+                int OP1 = 0, OP2 = 0; ;
 
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
 
-                int tmp1 = Config.registers[regNum];
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[0]);
+
+                int tmp1 = OP2;
                 int tmp2 = OP1;
 
 
@@ -582,77 +381,38 @@ namespace WinFormsApp1
                 {
                     Config.NZCV |= 1;
                 }
-                if ((tmp1 ^ tmp2) == 0)
+                else if ((tmp1 ^ tmp2) == 0)
                 {
+                    Config.setEQAUL();
+
                     Config.NZCV |= 4;
-
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
-
                 }
-                Config.registers[regNum] = (Config.registers[regNum] ^ OP1) % 65536;
-                if (Config.registers[regNum] < 0)
+
+                Config.setReg(ops[0], (OP2 ^ OP1) % 65536);
+
+                if (Config.getReg(ops[0]) < 0)
                 {
+                    Config.setEQAUL();
 
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
-
-                    Config.registers[regNum] = 0;
+                    Config.setReg(ops[0], 0);
 
 
                 }
-                if (Config.registers[regNum]> 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
+
 
             }
             else if (ops.Length == 3 && args != "")
             {
                 int OP1 = 0, OP2 = 0;
-                string op;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
 
-                if (ops[2][0] == 'R')
-                {
-                    op = ops[2].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
-
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[2]);
 
                 int tmp1 = OP1;
                 int tmp2 = OP2;
@@ -663,35 +423,21 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 ^ tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                 if ((tmp1 ^ tmp2) == 0)
-                {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                Config.setReg(ops[0], (OP1 ^ OP2) % 65536);
 
-                    Config.NZCV |= 4;
+                if (Config.getReg(ops[0]) < 0)
+                {
+                    Config.setLESS();
+
+                    Config.setReg(ops[0], 0);
                 }
-                Config.registers[regNum] = (OP1 ^ OP2) % 65536;
-
-                if (Config.registers[regNum] < 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
-
-                    Config.registers[regNum] = 0;
-                }
-                if (Config.registers[regNum] > 0)
-                {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
 
@@ -700,7 +446,7 @@ namespace WinFormsApp1
             {
                 if (Config.USER_STACK - Config.USER_STACK_BASE >= 2)
                 {
-                    //ACC = OP2 + OP1
+
                     int OP2 = Config.memory[--Config.USER_STACK];
                     int OP1 = Config.memory[--Config.USER_STACK];
                     int tmp1 = OP1;
@@ -711,35 +457,28 @@ namespace WinFormsApp1
                     }
                     if ((tmp1 ^ tmp2) == 0)
                     {
-                        Config.EQUAL = true;
-                        Config.LESS = false;
-                        Config.GREATER = false;
+                        Config.setEQAUL();
 
                         Config.NZCV |= 4;
                     }
 
 
                     Config.ACC = (OP2 ^ OP1) % 65536;
+
                     if (Config.ACC < 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = true;
-                        Config.GREATER = false;
-
+                        Config.setLESS();
                         Config.ACC = 0;
                     }
                     if (Config.ACC > 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = false;
-                        Config.GREATER = true;
+                        Config.setGREATER();
 
                     }
-
-
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
+
         }
 
         public static void LSH(string args)
@@ -751,21 +490,8 @@ namespace WinFormsApp1
 
             if (ops.Length == 1 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
+                int OP1 = Config.getReg(ops[0]);
 
-                    int regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-
-                }
-                else
-                {
-                    //TODO: ERROR
-
-                }
                 int tmp1 = Config.ACC;
                 int tmp2 = OP1;
 
@@ -775,9 +501,7 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 << tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
@@ -785,50 +509,26 @@ namespace WinFormsApp1
 
                 if (Config.ACC < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
                     Config.ACC = 0;
                 }
                 if (Config.ACC > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-
-                    
+                    Config.setGREATER();
                 }
 
             }
             else if (ops.Length == 2 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
+                
+                int OP1 = 0, OP2 = 0; ;
+                
 
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[0]);
 
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
-
-                int tmp1 = Config.registers[regNum];
+                int tmp1 = OP2;
                 int tmp2 = OP1;
 
 
@@ -836,75 +536,38 @@ namespace WinFormsApp1
                 {
                     Config.NZCV |= 1;
                 }
-                if ((tmp1 << tmp2) == 0)
+                else if ((tmp1 << tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (Config.registers[regNum] << OP1) % 65536;
-                if (Config.registers[regNum] < 0)
-                {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
 
-                    Config.registers[regNum] = 0;
+                Config.setReg(ops[0], (OP2 << OP1) % 65536);
+
+                if (Config.getReg(ops[0]) < 0)
+                {
+                    Config.setEQAUL();
+
+                    Config.setReg(ops[0], 0);
 
 
                 }
-
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-    
+                    Config.setGREATER();
+
                 }
+
 
             }
             else if (ops.Length == 3 && args != "")
             {
                 int OP1 = 0, OP2 = 0;
-                string op;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
 
-                    //TODO: ERROR
-                }
 
-                if (ops[2][0] == 'R')
-                {
-                    op = ops[2].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
-
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[2]);
 
                 int tmp1 = OP1;
                 int tmp2 = OP2;
@@ -915,35 +578,30 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 << tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (OP1 << OP2) % 65536;
+                Config.setReg(ops[0], (OP1 << OP2) % 65536);
 
-                if (Config.registers[regNum] < 0)
+                if (Config.getReg(ops[0]) < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
-                    Config.registers[regNum] = 0;
+                    Config.setReg(ops[0], 0);
                 }
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-                
+                    Config.setGREATER();
+
                 }
+
             }
             else if (ops.Length == 0 || args == "")
             {
                 if (Config.USER_STACK - Config.USER_STACK_BASE >= 2)
                 {
-                    //ACC = OP2 + OP1
+
                     int OP2 = Config.memory[--Config.USER_STACK];
                     int OP1 = Config.memory[--Config.USER_STACK];
                     int tmp1 = OP1;
@@ -954,30 +612,24 @@ namespace WinFormsApp1
                     }
                     if ((tmp1 << tmp2) == 0)
                     {
-                        Config.EQUAL = true;
-                        Config.LESS = false;
-                        Config.GREATER = false;
+                        Config.setEQAUL();
 
                         Config.NZCV |= 4;
                     }
 
 
                     Config.ACC = (OP2 << OP1) % 65536;
+
                     if (Config.ACC < 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = true;
-                        Config.GREATER = false;
+                        Config.setLESS();
                         Config.ACC = 0;
                     }
                     if (Config.ACC > 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = false;
-                        Config.GREATER = true;
+                        Config.setGREATER();
+
                     }
-
-
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
@@ -992,21 +644,9 @@ namespace WinFormsApp1
 
             if (ops.Length == 1 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
 
-                    int regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-
-                }
-                else
-                {
-                    //TODO: ERROR
-
-                }
+                int OP1 = Config.getReg(ops[0]);
+                
                 int tmp1 = Config.ACC;
                 int tmp2 = OP1;
 
@@ -1016,9 +656,7 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 >> tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
@@ -1026,50 +664,27 @@ namespace WinFormsApp1
 
                 if (Config.ACC < 0)
                 {
-
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
                     Config.ACC = 0;
                 }
                 if (Config.ACC > 0)
                 {
 
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
                 }
 
             }
             else if (ops.Length == 2 && args != "")
             {
-                string op;
-                int OP1 = 0;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
+                
+                int OP1 = 0, OP2 = 0; ;
+                
 
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[0]);
 
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
-
-                int tmp1 = Config.registers[regNum];
+                int tmp1 = OP2;
                 int tmp2 = OP1;
 
 
@@ -1077,32 +692,26 @@ namespace WinFormsApp1
                 {
                     Config.NZCV |= 1;
                 }
-                if ((tmp1 >> tmp2) == 0)
+                else if ((tmp1 >> tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (Config.registers[regNum] >> OP1) % 65536;
-                if (Config.registers[regNum] < 0)
-                {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
 
-                    Config.registers[regNum] = 0;
+                Config.setReg(ops[0], (OP2 >> OP1) %65536 );
+
+                if (Config.getReg(ops[0]) < 0)
+                {
+                    Config.setEQAUL();
+
+                    Config.setReg(ops[0], 0);
 
 
                 }
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0]) > 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
-
-
+                    Config.setGREATER();
 
                 }
 
@@ -1111,43 +720,10 @@ namespace WinFormsApp1
             else if (ops.Length == 3 && args != "")
             {
                 int OP1 = 0, OP2 = 0;
-                string op;
-                int regNum = 0;
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
+                
 
-                    //TODO: ERROR
-                }
-
-                if (ops[2][0] == 'R')
-                {
-                    op = ops[2].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
-
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-
-                }
-                else
-                {
-
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[1]);
+                OP2 = Config.getReg(ops[2]);
 
                 int tmp1 = OP1;
                 int tmp2 = OP2;
@@ -1158,27 +734,21 @@ namespace WinFormsApp1
                 }
                 if ((tmp1 >> tmp2) == 0)
                 {
-                    Config.EQUAL = true;
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV |= 4;
                 }
-                Config.registers[regNum] = (OP1 >> OP2) % 65536;
+                Config.setReg(ops[0] , (OP1 >> OP2) % 65536);
 
-                if (Config.registers[regNum] < 0)
+                if (Config.getReg(ops[0]) < 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = true;
-                    Config.GREATER = false;
+                    Config.setLESS();
 
-                    Config.registers[regNum] = 0;
+                    Config.setReg(ops[0], 0);
                 }
-                if (Config.registers[regNum] > 0)
+                if (Config.getReg(ops[0] )> 0)
                 {
-                    Config.EQUAL = false;
-                    Config.LESS = false;
-                    Config.GREATER = true;
+                    Config.setGREATER();
 
                 }
 
@@ -1198,6 +768,8 @@ namespace WinFormsApp1
                     }
                     if ((tmp1 >> tmp2) == 0)
                     {
+                        Config.setEQAUL();
+
                         Config.NZCV |= 4;
                     }
 
@@ -1205,16 +777,12 @@ namespace WinFormsApp1
                     Config.ACC = (OP2 >> OP1) % 65536;
                     if (Config.ACC < 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = true;
-                        Config.GREATER = false;
+                        Config.setLESS();
                         Config.ACC = 0;
                     }
                     if(Config.ACC > 0)
                     {
-                        Config.EQUAL = false;
-                        Config.LESS = false;
-                        Config.GREATER = true;
+                        Config.setGREATER();
 
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
@@ -1231,40 +799,17 @@ namespace WinFormsApp1
 
             if(ops.Length == 2)
             {
-                string op;
                 int OP1 = 0;
                 int OP2 = 0;
-                int regNum = 0;
-                if (ops[0][0] == 'R')
-                {
-                    op = ops[0].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP1 = Config.registers[regNum];
-                }
-                else
-                {
+                
 
-                    //TODO: ERROR
-                }
-
-                if (ops[1][0] == 'R')
-                {
-                    op = ops[1].Substring(1);
-                    regNum = Convert.ToInt32(op);
-                    OP2 = Config.registers[regNum];
-                }
-                else
-                {
-                    //TODO: ERROR
-                }
+                OP1 = Config.getReg(ops[0]);
+                OP2 = Config.getReg(ops[1]);
 
 
                 if(OP1 == OP2)
                 {
-                    Config.EQUAL = true;
-
-                    Config.LESS = false;
-                    Config.GREATER = false;
+                    Config.setEQAUL();
 
                     Config.NZCV = 0;
 
@@ -1273,11 +818,7 @@ namespace WinFormsApp1
                 if(OP1 < OP2)
                 {
 
-                    Config.LESS = true;
-
-                    Config.GREATER = false;
-                    Config.EQUAL = false;
-
+                    Config.setLESS();
                     Config.NZCV = 0;
 
                     Config.NZCV |= 2;
@@ -1285,15 +826,42 @@ namespace WinFormsApp1
                 }
                 if (OP1 > OP2)
                 {
-                    Config.GREATER = true;
-
-                    Config.EQUAL = false;
-                    Config.LESS = false;
+                    Config.setGREATER();
 
                     Config.NZCV = 0;
                     Config.NZCV |=8 ;
                 }
 
+
+            }
+            if(ops.Length == 1)
+            {
+                int OP1 = Config.getReg(ops[0]);
+
+                if (Config.ACC  == OP1)
+                {
+                    Config.setEQAUL();
+
+                    Config.NZCV = 0;
+
+                    Config.NZCV |= 4;
+                }
+                if (Config.ACC < OP1)
+                {
+
+                    Config.setLESS();
+                    Config.NZCV = 0;
+
+                    Config.NZCV |= 2;
+
+                }
+                if (Config.ACC > OP1 )
+                {
+                    Config.setGREATER();
+
+                    Config.NZCV = 0;
+                    Config.NZCV |= 8;
+                }
 
             }
 

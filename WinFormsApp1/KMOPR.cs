@@ -10,9 +10,6 @@ namespace WinFormsApp1
     {
         public static NAMES reslove(string s)
         {
-            
-
-
             switch (s)
             {
                 case "POP":
@@ -72,6 +69,9 @@ namespace WinFormsApp1
 
                 case "ST":
                     return NAMES.ST;
+
+                case "CLR":
+                    return NAMES.CLR;
 
                 case "JSR":
                     return NAMES.JSR;
@@ -178,13 +178,20 @@ namespace WinFormsApp1
                     }
                 case NAMES.LSH:
                     {
-                        LogicInstruction.LSH(first_split[1]);
+                        if (first_split.Length == 1)
+                            LogicInstruction.LSH("");
+                        else
+                            LogicInstruction.LSH(first_split[1]);
 
                         break;
                     }
                 case NAMES.RSH:
                     {
-                        LogicInstruction.RSH(first_split[1]);
+                        if (first_split.Length == 1)
+                            LogicInstruction.RSH("");
+
+                        else
+                            LogicInstruction.RSH(first_split[1]);
 
                         break;
                     }
@@ -289,6 +296,16 @@ namespace WinFormsApp1
                         break;
                     }
 
+                case NAMES.CLR:
+                    {
+                        if (first_split.Length == 1)
+                            LoadStore.CLR("");
+                        else
+                            LoadStore.CLR(first_split[1]);
+                        break;
+                    }
+
+
                 case NAMES.HALT:
                     {
                         Config.RUNNIGN = false;
@@ -306,6 +323,8 @@ namespace WinFormsApp1
             }
         }
     }
+
+    
 
     public enum NAMES
     {
@@ -336,8 +355,11 @@ namespace WinFormsApp1
         CMP     =   0x19,
         LD      =   0x1A,
         ST      =   0x1B,
+        CLR     =   0x1C,
         HALT    =   0XFF
     }
+
+    
 
     
 }
