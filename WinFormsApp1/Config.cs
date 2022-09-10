@@ -52,7 +52,63 @@ namespace WinFormsApp1
             GREATER = false;
 
             labels.Clear();
-    }
+     
+        
+        }
+
+        public static void setEQAUL()
+        {
+            Config.EQUAL = true;
+            Config.LESS = false;
+            Config.GREATER = false;
+        }
+
+        public static void setLESS()
+        {
+            Config.EQUAL = false;
+            Config.LESS = true;
+            Config.GREATER = false;
+        }
+
+        public static void setGREATER()
+        {
+            Config.EQUAL = false;
+            Config.LESS = false;
+            Config.GREATER = true;
+        }
+
+        public static int getReg(string op)
+        {
+            int ret_val = 0 ;
+            if (op[0] == 'R')
+            {
+                op = op.Substring(1);
+                int regNum = Convert.ToInt32(op);
+                ret_val = Config.registers[regNum];
+            }
+            else
+            {
+                //TODO: ERROR
+            }
+
+            return ret_val;
+
+        }
+
+        public static void setReg(string op, int val)
+        {
+            if (op[0] == 'R')
+            {
+                op = op.Substring(1);
+                int regNum = Convert.ToInt32(op);
+                Config.registers[regNum] = val;
+            }
+            else
+            {
+                //TODO: ERROR
+            }
+        }
+
 
 
     }

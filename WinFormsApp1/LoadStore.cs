@@ -79,13 +79,38 @@ namespace WinFormsApp1
         }
 
 
-         public static void ST(string args)
+        public static void ST(string args)
         {
             String[] ops = args.Split(',');
             if (ops.Length > 0)
                 trimOps(ref ops);
 
+            if (ops.Length == 2 && args != "")
+            {
+                int OP1 = 0;
 
+                if (ops[1][0] == 'R')
+                {
+                    string op = ops[1].Substring(1);
+
+                    int regNum = Convert.ToInt32(op);
+
+                    OP1 = Config.registers[regNum];
+                }
+
+                if (ops[0][0] == 'R')
+                {
+                    string op = ops[0].Substring(1);
+                    int regNum = Convert.ToInt32(op);
+
+                    int memLoc = Config.registers[regNum];
+
+                    Config.memory[memLoc] = OP1;
+
+                }
+
+
+            }
         }
 
         public static void MOV(string args)

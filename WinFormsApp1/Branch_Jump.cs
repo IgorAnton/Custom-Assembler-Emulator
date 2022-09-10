@@ -33,7 +33,7 @@ namespace WinFormsApp1
             args = args.Trim();
             int jumpIndex = Config.labels[args];
             int uslov = Config.NZCV & 4;
-            if(uslov != 0)
+            if(Config.EQUAL)
             {
                 Config.codeIndex = jumpIndex - 1;
             }
@@ -51,7 +51,7 @@ namespace WinFormsApp1
             int jumpIndex = Config.labels[args];
             int uslov =  (Config.NZCV & 2);
             //(Config.NZCV & 8) ^
-            if (uslov != 0)
+            if (Config.LESS)
             {
                 Config.codeIndex = jumpIndex - 1;
             }
@@ -71,7 +71,7 @@ namespace WinFormsApp1
             int uslov = ((Config.NZCV & 8) ) ;
                 //^ (Config.NZCV & 1)) | (Config.NZCV & 4);
 
-            if (uslov == 0)
+            if (Config.GREATER)
             {
                 Config.codeIndex = jumpIndex - 1;
             }
@@ -89,7 +89,7 @@ namespace WinFormsApp1
             int jumpIndex = Config.labels[args];
             int uslov = ((Config.NZCV & 8) ^ (Config.NZCV & 1)) ; // N xor V = 0
 
-            if (uslov == 0)
+            if (Config.GREATER || Config.EQUAL)
             {
                 Config.codeIndex = jumpIndex - 1;
             }
@@ -106,7 +106,7 @@ namespace WinFormsApp1
             int jumpIndex = Config.labels[args];
             int uslov = ((Config.NZCV & 8) ^ (Config.NZCV & 1)) | (Config.NZCV & 4);
 
-            if (uslov != 0)
+            if (Config.LESS || Config.EQUAL)
             {
                 Config.codeIndex = jumpIndex - 1;
             }
@@ -122,7 +122,7 @@ namespace WinFormsApp1
             args = args.Trim();
             int jumpIndex = Config.labels[args];
             int uslov = Config.NZCV & 4;
-            if (uslov == 0)
+            if (!Config.EQUAL)
             {
                 Config.codeIndex = jumpIndex - 1;
             }

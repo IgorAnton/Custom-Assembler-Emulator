@@ -64,7 +64,11 @@ namespace WinFormsApp1
 
                     Config.ACC = 0;
                 }
-
+                else if(Config.ACC > 0){
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+                }
 
             }
             else if (ops.Length == 2 && args != "")
@@ -119,6 +123,13 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
 
+
+                }
+                else if(Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
                 }
             }
@@ -188,7 +199,13 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
                 }
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                }
 
             }
             else if (ops.Length == 0 || args == "")
@@ -222,6 +239,13 @@ namespace WinFormsApp1
                         Config.GREATER = false;
                         Config.ACC = 0;
                     }
+                    if (Config.ACC > 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = false;
+                        Config.GREATER = true;
+                    }
+
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
@@ -275,7 +299,14 @@ namespace WinFormsApp1
 
                     Config.ACC = 0;
                 }
+                if (Config.ACC > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                    
+                }
 
             }
             else if (ops.Length == 2 && args != "")
@@ -332,6 +363,14 @@ namespace WinFormsApp1
 
 
                 }
+                if (Config.ACC > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+
+                }
+
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -399,7 +438,12 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
                 }
-
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+                }
 
             }
             else if (ops.Length == 0 || args == "")
@@ -432,6 +476,12 @@ namespace WinFormsApp1
                         Config.LESS = true;
                         Config.GREATER = false;
                         Config.ACC = 0;
+                    }
+                    if (Config.ACC > 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = false;
+                        Config.GREATER = true;
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
@@ -489,7 +539,13 @@ namespace WinFormsApp1
                     Config.ACC = 0;
                 }
 
+                if (Config.ACC > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                }
             }
             else if (ops.Length == 2 && args != "")
             {
@@ -547,6 +603,15 @@ namespace WinFormsApp1
 
 
                 }
+                if (Config.registers[regNum]> 0)
+                {
+
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+
+                }
+
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -604,6 +669,14 @@ namespace WinFormsApp1
 
                     Config.NZCV |= 4;
                 }
+                 if ((tmp1 ^ tmp2) == 0)
+                {
+                    Config.EQUAL = true;
+                    Config.LESS = false;
+                    Config.GREATER = false;
+
+                    Config.NZCV |= 4;
+                }
                 Config.registers[regNum] = (OP1 ^ OP2) % 65536;
 
                 if (Config.registers[regNum] < 0)
@@ -614,7 +687,13 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
                 }
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                }
 
             }
             else if (ops.Length == 0 || args == "")
@@ -649,6 +728,15 @@ namespace WinFormsApp1
 
                         Config.ACC = 0;
                     }
+                    if (Config.ACC > 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = false;
+                        Config.GREATER = true;
+
+                    }
+
+
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
@@ -703,7 +791,14 @@ namespace WinFormsApp1
 
                     Config.ACC = 0;
                 }
+                if (Config.ACC > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                    
+                }
 
             }
             else if (ops.Length == 2 && args != "")
@@ -760,6 +855,15 @@ namespace WinFormsApp1
 
 
                 }
+
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+    
+                }
+
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -827,8 +931,13 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
                 }
-
-
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+                
+                }
             }
             else if (ops.Length == 0 || args == "")
             {
@@ -861,7 +970,14 @@ namespace WinFormsApp1
                         Config.GREATER = false;
                         Config.ACC = 0;
                     }
-                        
+                    if (Config.ACC > 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = false;
+                        Config.GREATER = true;
+                    }
+
+
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
@@ -917,7 +1033,13 @@ namespace WinFormsApp1
 
                     Config.ACC = 0;
                 }
+                if (Config.ACC > 0)
+                {
 
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+                }
 
             }
             else if (ops.Length == 2 && args != "")
@@ -974,6 +1096,17 @@ namespace WinFormsApp1
 
 
                 }
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
+
+
+
+                }
+
+
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -1041,7 +1174,13 @@ namespace WinFormsApp1
 
                     Config.registers[regNum] = 0;
                 }
+                if (Config.registers[regNum] > 0)
+                {
+                    Config.EQUAL = false;
+                    Config.LESS = false;
+                    Config.GREATER = true;
 
+                }
 
             }
             else if (ops.Length == 0 || args == "")
@@ -1065,7 +1204,19 @@ namespace WinFormsApp1
 
                     Config.ACC = (OP2 >> OP1) % 65536;
                     if (Config.ACC < 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = true;
+                        Config.GREATER = false;
                         Config.ACC = 0;
+                    }
+                    if(Config.ACC > 0)
+                    {
+                        Config.EQUAL = false;
+                        Config.LESS = false;
+                        Config.GREATER = true;
+
+                    }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
                 }
             }
