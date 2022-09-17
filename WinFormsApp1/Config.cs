@@ -11,7 +11,7 @@ namespace WinFormsApp1
 
         public static int[] registers = new int[32];
         public static int ACC = 0;
-        public static int PC = 1000;
+        public static int PC = 0x1000;
 
         public static int[] memory = new int[65536];
 
@@ -28,14 +28,22 @@ namespace WinFormsApp1
         public static bool LESS = false;
         public static bool GREATER = false;
 
+        public static String MemoryString = "";
+
+        
         public static Dictionary<String, int> labels = new Dictionary<string, int>();
+
+
+        public static Dictionary<int, String> instrucitonsInBinary = new Dictionary<int, String>();
+
+
         public static int codeIndex = 0;
 
         public static void resetConfig()
         {
             Array.Clear(registers,0, registers.Length);
             ACC = 0;
-            PC = 1000;
+            PC = 0x1000;
             RUNNIGN = true;
             Array.Clear(memory, 0, memory.Length);
             codeIndex = 0;
@@ -51,8 +59,12 @@ namespace WinFormsApp1
             LESS = false;
             GREATER = false;
 
+            MemoryString = "";
+
+            instrucitonsInBinary.Clear();
+
             labels.Clear();
-     
+                
         
         }
 
@@ -109,7 +121,10 @@ namespace WinFormsApp1
             }
         }
 
-
+        public static bool isBranch(String name)
+        {
+            return name == "JUMP" || name == "BEQ" || name == "BLSS" || name == "BGT" || name == "BGE" || name == "BLEQ" || name == "BNEQ" || name == "JSR";
+        }
 
     }
 }

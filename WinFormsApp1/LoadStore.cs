@@ -32,10 +32,14 @@ namespace WinFormsApp1
                      OP = Convert.ToInt32(ops[1]);
 
                 Config.setReg(ops[0], OP);
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("LD", ops[0], ops[1]);
+
             }
             else if(ops.Length == 1)
             {
                 Config.ACC =  Config.getReg(ops[0]);
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("LD", ops[0]);
             }
             else
             {
@@ -59,12 +63,16 @@ namespace WinFormsApp1
 
                 Config.memory[OP2] = OP1;
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("ST", ops[0], ops[1]);
+
             }
             if(ops.Length == 1)
             {
                 int OP1 = Config.getReg(ops[0]);
 
                 Config.memory[OP1] = Config.ACC;
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("ST", ops[0]);
 
             }
         }
@@ -82,11 +90,16 @@ namespace WinFormsApp1
 
                 Config.setReg(ops[0], OP);
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("MOV", ops[0], ops[1]);
+
             }
             else if(ops.Length == 1)
             {
                 Config.setReg(ops[0], Config.ACC);
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("MOV", ops[0]);
             }
+
 
         }
 
@@ -99,10 +112,14 @@ namespace WinFormsApp1
             if (ops.Length == 1 && args != "")
             {
                 Config.setReg(ops[0], 0);
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("CLR", ops[0]);
+
             }
             else if (ops.Length == 0 || args == "")
             {
                 Config.ACC = 0;
+                Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("CLR");
             }
 
         }

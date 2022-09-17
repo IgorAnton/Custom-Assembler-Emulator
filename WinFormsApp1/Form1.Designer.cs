@@ -169,6 +169,7 @@
             this.button6.TabIndex = 4;
             this.button6.Text = "BUILD";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -178,6 +179,7 @@
             this.button7.TabIndex = 6;
             this.button7.Text = "MEMORY";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 
@@ -194,7 +196,7 @@
             this.richTextBox3.BackColor = System.Drawing.Color.White;
             this.richTextBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBox3.Font = new System.Drawing.Font("Courier New", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBox3.Location = new System.Drawing.Point(20, 64);
+            this.richTextBox3.Location = new System.Drawing.Point(12, 64);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.ReadOnly = true;
             this.richTextBox3.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;

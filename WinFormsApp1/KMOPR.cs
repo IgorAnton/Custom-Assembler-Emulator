@@ -317,6 +317,9 @@ namespace WinFormsApp1
                         {
                             Config.HALT_MSG = "Build didn't execut successfully!";
                         }
+
+                        Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("HALT");
+
                         break;
                     }
                 

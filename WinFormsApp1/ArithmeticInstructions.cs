@@ -51,6 +51,9 @@ namespace WinFormsApp1
                 }
                 Config.ACC = (Config.ACC + OP1) % 65536;
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("ADD", ops[0]);
+
+              
 
             } else if (ops.Length == 2 && args != "") // two operands ADD OP2,OP1
             {
@@ -81,6 +84,7 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("ADD", ops[0], ops[1]) ;
 
             }                                       //                   ops[0] ops[1] ops[2]
             else if (ops.Length == 3 && args != "") // three operands ADD OP3 , OP2 , OP1
@@ -113,6 +117,8 @@ namespace WinFormsApp1
                 {
                     Config.setLESS();
                 }
+
+                Config.instrucitonsInBinary[Config.PC ] = Memory.formThreeAddres("ADD",  ops[0], ops[1], ops[2]) ;
 
             }
             else if (ops.Length == 0 || args == "") // zero operands
@@ -147,6 +153,8 @@ namespace WinFormsApp1
 
                     Config.ACC = (OP2 + OP1) % 65536;
                     Config.memory[Config.USER_STACK++] = Config.ACC;
+
+                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("ADD") ;
                 }
 
             }
@@ -199,6 +207,7 @@ namespace WinFormsApp1
 
                 Config.ACC = (Config.ACC - OP1) % 65536;
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("SUB", ops[0]);
 
             }
             else if (ops.Length == 2 && args != "") // two operands ADD OP2,OP1
@@ -234,6 +243,7 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("SUB", ops[0], ops[1]);
 
             }                                       //                   ops[0] ops[1] ops[2]
             else if (ops.Length == 3 && args != "") // three operands ADD OP3 , OP2 , OP1
@@ -270,6 +280,8 @@ namespace WinFormsApp1
 
                     Config.setLESS();
                 }
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("SUB", ops[0], ops[1], ops[2]);
 
             }
             else if (ops.Length == 0 || args == "") // zero operands
@@ -308,6 +320,9 @@ namespace WinFormsApp1
                         Config.setLESS();
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
+
+                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("SUB");
+
                 }
 
             }
@@ -358,6 +373,8 @@ namespace WinFormsApp1
 
                 Config.ACC = (Config.ACC * OP1) % 65536;
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("MUL", ops[0]);
+
 
             }
             else if (ops.Length == 2 && args != "") // two operands ADD OP2,OP1
@@ -393,7 +410,7 @@ namespace WinFormsApp1
 
                     Config.setLESS();
                 }
-
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("MUL", ops[0], ops[1]);
 
             }                                       //                   ops[0] ops[1] ops[2]
             else if (ops.Length == 3 && args != "") // three operands ADD OP3 , OP2 , OP1
@@ -430,6 +447,8 @@ namespace WinFormsApp1
 
                     Config.setLESS();
                 }
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("MUL", ops[0], ops[1], ops[2]);
 
             }
             else if (ops.Length == 0 || args == "") // zero operands
@@ -468,6 +487,9 @@ namespace WinFormsApp1
                         Config.setLESS();
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
+
+                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("MUL");
+
                 }
 
             }
@@ -523,7 +545,7 @@ namespace WinFormsApp1
 
                 Config.ACC = (Config.ACC / OP1) % 65536;
 
-
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("DIV", ops[0]);
             }
             else if (ops.Length == 2 && args != "") // two operands ADD OP1,OP2
             {
@@ -565,6 +587,7 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("DIV", ops[0], ops[1]);
 
             }                                       //                   ops[0] ops[1] ops[2]
             else if (ops.Length == 3 && args != "") // three operands ADD OP3 , OP2 , OP1
@@ -609,6 +632,8 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("DIV", ops[0], ops[1], ops[2]);
+
             }
             else if (ops.Length == 0 || args == "") // zero operands
             {
@@ -652,6 +677,8 @@ namespace WinFormsApp1
                         Config.setLESS();
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
+
+                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("DIV");
                 }
 
             }
@@ -699,6 +726,8 @@ namespace WinFormsApp1
 
                 Config.ACC = (Config.ACC % OP1) % 65536;
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("MOD", ops[0]);
+
 
             }
             else if (ops.Length == 2 && args != "") // two operands ADD OP2,OP1
@@ -737,6 +766,7 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("MOD", ops[0], ops[1]);
 
             }                                       //                   ops[0] ops[1] ops[2]
             else if (ops.Length == 3 && args != "") // three operands ADD OP3 , OP2 , OP1
@@ -774,6 +804,8 @@ namespace WinFormsApp1
                     Config.setLESS();
                 }
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("MOD", ops[0], ops[1], ops[2]);
+
             }
             else if (ops.Length == 0 || args == "") // zero operands
             {
@@ -800,8 +832,6 @@ namespace WinFormsApp1
                         Config.setGREATER();
                     }
 
-
-
                     Config.ACC = (OP2 % OP1) % 65536;
 
                     if (OP2 % OP1 < 0)
@@ -811,6 +841,9 @@ namespace WinFormsApp1
                         Config.setLESS();
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
+
+                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("MOD");
+
                 }
 
             }
@@ -832,7 +865,6 @@ namespace WinFormsApp1
 
                 int OP = Config.getReg(ops[0]);
                 
-
                 if(OP + 1 > 65536)
                 {
                     Config.NZCV |= 1;
@@ -856,6 +888,8 @@ namespace WinFormsApp1
                 }
 
                 Config.setReg(ops[0], (OP + 1) % 65536);
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("INC", ops[0]);
 
             }
             else if (ops.Length == 0 || args == "")
@@ -888,13 +922,14 @@ namespace WinFormsApp1
 
 
                 Config.ACC = (Config.ACC + 1) % 65535;
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("INC");
             }
             else
             {
                 //TODO: ERROR
             }
         }
-
         public static void DEC(String args)
         {
             String[] ops = args.Split(',');
@@ -931,6 +966,8 @@ namespace WinFormsApp1
 
                 Config.setReg(ops[0], (OP - 1) % 65536);
 
+                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("DEC", ops[0]);
+
             }
             else if (ops.Length == 0 || args == "")
             {
@@ -962,15 +999,14 @@ namespace WinFormsApp1
 
 
                 Config.ACC = (Config.ACC - 1) % 65535;
+
+                Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("DEC");
             }
             else
             {
                 //TODO: ERROR
             }
         }
-
-
-        
 
     }
 }

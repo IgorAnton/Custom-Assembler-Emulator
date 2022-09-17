@@ -93,15 +93,32 @@ namespace WinFormsApp1
 
         private static string getRegNumInBin(String reg)
         {
-            reg = reg.Substring(1);
+            if (reg != null)
+            {
 
-            int regNum = Convert.ToInt32(reg);
+                reg = reg.ToUpper();
+                int regNum = 0;
+                if (reg[0] != 'R')
+                {
+                    regNum = Convert.ToInt32(reg);
+                }
+                else
+                {
+                    reg = reg.Substring(1);
+
+                    regNum = Convert.ToInt32(reg);
+                }
+
 ;
-            reg = Convert.ToString(regNum, 2);
+                reg = Convert.ToString(regNum, 2);
 
-            return reg.PadLeft(8, '0');
-               
-           
+                return reg.PadLeft(8, '0');
+
+            }
+            else
+            {
+                return "".PadLeft(8, '0');
+            }
 
         }
 
@@ -112,31 +129,64 @@ namespace WinFormsApp1
         }
 
 
-        public static String formZeroAddres(String name,int state) {
+        public static String formZeroAddres(String name) {
 
-            return formFirstByte(name, state) + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " | ";
+            return " | " + formFirstByte(name, 0) + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " | ";
         }
 
-        public static String formOneAddres(String name,int status, String register)
+        public static String formOneAddres(String name, String register)
         {
-            return formFirstByte(name, status) + " " + formByte(register) + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " | ";
+            return " | " + formFirstByte(name, 1) + " " + formByte(register) + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " | ";
         }
 
-        public static String formBranch(String name, int status, String label)
+        public static String formBranch(String name, String label)
         {
-            return formFirstByte(name, status) + " " + "..." + " " + "".PadLeft(8, '0') + " " + "".PadLeft(8, '0') + " | " ;
+            return " | " + formFirstByte(name, 1) + " " + label.PadLeft(24,'0') + " | " ;
         }
 
-        public static String formTwoAddres(String name,int status,String register1,String register2)
+        public static String formTwoAddres(String name,String register1,String register2)
         {
-            return formFirstByte(name, status) + " " + formByte(register1) + " " + formByte(register2) + " " + "".PadLeft(8, '0') + " | ";
+            return " | " + formFirstByte(name, 2) + " " + formByte(register1) + " " + formByte(register2) + " " + "".PadLeft(8, '0') + " | ";
 
         }
 
-        public static String formThreeAddres(String name, int status, String register1, String register2,String register3)
+        public static String formThreeAddres(String name,  String register1, String register2,String register3)
         {
-            return formFirstByte(name, status) + " " + formByte(register1) + " " + formByte(register2) + " " + formByte(register3) + " | ";
+            return " | " + formFirstByte(name, 3) + " " + formByte(register1) + " " + formByte(register2) + " " + formByte(register3) + " | ";
 
         }
+
+
+        public static String formMemory(String name, String[] operands)
+        {
+            string ret = "";
+
+            if(operands.Length == 0 )
+            {
+                ret = formZeroAddres(name);
+            }
+            else if(operands.Length == 1  )
+            {
+                ret = formOneAddres(name, operands[0]);
+            }
+            else if(operands.Length == 2 )
+            {
+                ret = formTwoAddres(name, operands[0], operands[1]);
+            }
+            
+            else if(operands.Length == 3)
+            {
+                ret = formThreeAddres(name, operands[0], operands[1], operands[2]);
+            }
+            else
+            {
+                //TODO: ERROR
+            }
+
+            return ret;
+        }
+
+        
+
     }
 }

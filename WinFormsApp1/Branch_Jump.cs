@@ -19,6 +19,10 @@ namespace WinFormsApp1
             args = args.Trim();
             int jumpIndex = Config.labels[args];
 
+            String jumpAddres = Convert.ToString(jumpIndex*4+0x1000,2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("JUMP", jumpAddres);
+
             Config.codeIndex = jumpIndex-1;
 
         }
@@ -36,7 +40,14 @@ namespace WinFormsApp1
             if(Config.EQUAL)
             {
                 Config.codeIndex = jumpIndex - 1;
+
+                
+
             }
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BEQ", jumpAddres);
+
 
         }
         public static void BLSS(string args)
@@ -55,6 +66,10 @@ namespace WinFormsApp1
             {
                 Config.codeIndex = jumpIndex - 1;
             }
+
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BLSS", jumpAddres);
 
         }
 
@@ -76,6 +91,10 @@ namespace WinFormsApp1
                 Config.codeIndex = jumpIndex - 1;
             }
 
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BGT", jumpAddres);
+
         }
         public static void BGE(string args)
         {
@@ -93,6 +112,10 @@ namespace WinFormsApp1
             {
                 Config.codeIndex = jumpIndex - 1;
             }
+
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BGE", jumpAddres);
         }
         public static void BLEQ(string args)
         {
@@ -111,6 +134,10 @@ namespace WinFormsApp1
                 Config.codeIndex = jumpIndex - 1;
             }
 
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BLEQ", jumpAddres);
+
         }
         public static void BNEQ(string args)
         {
@@ -126,6 +153,10 @@ namespace WinFormsApp1
             {
                 Config.codeIndex = jumpIndex - 1;
             }
+
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("BNEQ", jumpAddres);
 
         }
         
@@ -145,12 +176,19 @@ namespace WinFormsApp1
             Config.PC = jumpIndex * 4 + 1000;
             Config.codeIndex = jumpIndex - 1;
 
+            String jumpAddres = Convert.ToString(jumpIndex*4 + 0x1000, 2);
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formBranch("JSR", jumpAddres);
+
+
         }
         public static void RTS()
         {
             Config.codeIndex = Config.memory[--Config.SYS_STACK];
             Config.NZCV = Config.memory[--Config.SYS_STACK];
             Config.PC = Config.memory[--Config.SYS_STACK];
+
+            Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("RTS");
         }
 
 

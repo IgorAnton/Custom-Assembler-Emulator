@@ -1,8 +1,6 @@
 namespace WinFormsApp1
 {
-
-
-   
+    using System.CodeDom.Compiler;
     using System.Text.RegularExpressions;
 
     public partial class Form1 : Form
@@ -20,6 +18,8 @@ namespace WinFormsApp1
             richTextBox3.Font = richTextBox2.Font;
             richTextBox2.Select();
             AddLineNumbers();
+            Memory.initOPCODES();
+            Memory.initMACHINESTATE();
             
         }
         
@@ -82,6 +82,98 @@ namespace WinFormsApp1
             
 
         }
+
+        private void compile(String[] code)
+        {
+            int n = code.Length;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (code[i] == null)
+                    continue;
+
+                if (code[i].Contains(':'))
+                {
+                    String[] s = code[i].Split(':', 2);
+                    s[0] = s[0].Trim().ToUpper();
+                    s[1] = s[1].Trim();
+                    Config.labels[s[0]] = i;
+                    code[i] = s[1];
+                }
+            }
+
+            int ind = 0;
+
+            int PC = 0x1000;
+
+            for(; ind < n; ind++)
+            {
+                if (code[ind] == null)
+                    continue;
+             /*   if (code[ind] == "HALT")
+                {
+                    Config.instrucitonsInBinary[PC] = Memory.formZeroAddres("HALT");
+
+                    // break;
+                    continue;
+                }
+             */
+                String[] s = code[ind].Split(' ', 2);
+                String[] ops = new string[1];
+                if (s.Length > 1)
+                {
+                     ops = s[1].Split(',');
+
+                    trimOps(ref ops);
+                }
+
+                
+
+                if (Config.isBranch(s[0]))
+                {
+
+                    Config.instrucitonsInBinary[PC] = Memory.formBranch(s[0], Convert.ToString(Config.labels[s[1]]*4 + 0x1000 ,2));
+
+                }
+                else
+                {
+                    Config.instrucitonsInBinary[PC] = Memory.formMemory(s[0], ops);
+                }
+
+                PC += 4;
+            }
+            
+
+
+
+        }
+
+        private void buildCode()
+        {
+            int n = richTextBox2.Lines.Count();
+
+
+            String[] code = new String[n];
+            int j = 0;
+            for (int i = 0; i < n; i++)
+            {
+                string s = richTextBox2.Lines[i].ToString().ToUpper().Trim();
+
+                if (s == "")
+                    continue;
+
+                code[j] = s;
+                j++;
+
+            }
+
+
+            compile(code);
+
+        }
+
+
+
         private void button5_Click(object sender, EventArgs e)
         {
             Config.resetConfig();
@@ -282,6 +374,29 @@ namespace WinFormsApp1
         {
             string fname = saveFileDialog1.FileName;
             File.WriteAllText(fname, richTextBox2.Text);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form3 f3 = new Form3();
+            f3.Show();
+            
+            
+        }
+
+        private static void trimOps(ref String[] ops)
+        {
+            for (int i = 0; i < ops.Length; i++)
+            {
+                ops[i] = ops[i].Trim();
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+           
+
+            buildCode();
         }
     }
 }
