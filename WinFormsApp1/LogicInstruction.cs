@@ -52,7 +52,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("AND", ops[0]);
 
             }
             else if (ops.Length == 2 && args != "")
@@ -94,7 +93,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("AND", ops[0], ops[1]);
 
             }
             else if (ops.Length == 3 && args != "")
@@ -132,7 +130,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("AND", ops[0], ops[1], ops[2]);
 
             }
             else if (ops.Length == 0 || args == "")
@@ -170,7 +167,6 @@ namespace WinFormsApp1
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
 
-                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("AND");
                 }
             }
 
@@ -213,9 +209,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("OR", ops[0]);
-
-
             }
             else if (ops.Length == 2 && args != "")
             {
@@ -257,8 +250,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("OR", ops[0], ops[1]);
-
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -294,8 +285,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
 
                 }
-
-                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("OR", ops[0], ops[1], ops[2]);
 
             }
             else if (ops.Length == 0 || args == "")
@@ -333,7 +322,6 @@ namespace WinFormsApp1
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
 
-                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("OR");
 
                 }
             }
@@ -379,7 +367,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("XOR", ops[0]);
 
             }
             else if (ops.Length == 2 && args != "")
@@ -422,7 +409,7 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("XOR", ops[0], ops[1]);
+               
 
             }
             else if (ops.Length == 3 && args != "")
@@ -460,8 +447,7 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("XOR", ops[0], ops[1], ops[2]);
-
+          
             }
             else if (ops.Length == 0 || args == "")
             {
@@ -498,7 +484,6 @@ namespace WinFormsApp1
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
 
-                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("XOR");
 
                 }
             }
@@ -541,7 +526,7 @@ namespace WinFormsApp1
                 {
                     Config.setGREATER();
                 }
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("LSH", ops[0]);
+               
             }
             else if (ops.Length == 2 && args != "")
             {
@@ -583,8 +568,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("LSH", ops[0], ops[1]);
-
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -621,8 +604,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("LSH", ops[0], ops[1], ops[2]);
-
             }
             else if (ops.Length == 0 || args == "")
             {
@@ -658,8 +639,6 @@ namespace WinFormsApp1
 
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
-
-                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("LSH");
 
                 }
             }
@@ -704,8 +683,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("RSH", ops[0]);
-
             }
             else if (ops.Length == 2 && args != "")
             {
@@ -747,9 +724,6 @@ namespace WinFormsApp1
 
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("RSH", ops[0], ops[1]);
-
-
             }
             else if (ops.Length == 3 && args != "")
             {
@@ -785,9 +759,6 @@ namespace WinFormsApp1
                     Config.setGREATER();
 
                 }
-
-                Config.instrucitonsInBinary[Config.PC] = Memory.formThreeAddres("RSH", ops[0], ops[1], ops[2]);
-
             }
             else if (ops.Length == 0 || args == "")
             {
@@ -823,7 +794,7 @@ namespace WinFormsApp1
                     }
                     Config.memory[Config.USER_STACK++] = Config.ACC;
 
-                    Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("RSH");
+                   
                 }
             }
         }
@@ -870,7 +841,7 @@ namespace WinFormsApp1
                     Config.NZCV |=8 ;
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formTwoAddres("CMP", ops[0], ops[1]);
+             
 
 
             }
@@ -903,15 +874,7 @@ namespace WinFormsApp1
                     Config.NZCV |= 8;
                 }
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("CMP", ops[0]);
-
             }
-
-            
-
-
-
-
         }
 
     }

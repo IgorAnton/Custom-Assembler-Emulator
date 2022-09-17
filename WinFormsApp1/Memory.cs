@@ -91,8 +91,23 @@ namespace WinFormsApp1
 
         }
 
+       private static void chunk(ref string[] niz, string s)
+        {
+            int j = 0;
+            int ind = 0;
+
+            for (int i = s.Length - 1; i >= 0;)
+            {
+                niz[j] = s.Substring(ind, 8);
+                j++;
+                ind += 8;
+                i -= 8;
+            }
+        }
+
         private static string getRegNumInBin(String reg)
         {
+            
             if (reg != null)
             {
 
@@ -141,7 +156,13 @@ namespace WinFormsApp1
 
         public static String formBranch(String name, String label)
         {
-            return " | " + formFirstByte(name, 1) + " " + label.PadLeft(24,'0') + " | " ;
+            label = label.PadLeft(24, '0');
+            String[] divided = new String[3];
+
+            chunk(ref  divided, label);
+
+
+            return " | " + formFirstByte(name, 1) + " " + divided[0] + " " + divided[1] + " " + divided[2] + " | " ;
         }
 
         public static String formTwoAddres(String name,String register1,String register2)

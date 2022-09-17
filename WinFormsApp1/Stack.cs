@@ -22,7 +22,7 @@ namespace WinFormsApp1
                 Config.memory[Config.USER_STACK] = reg;
                 Config.USER_STACK++;
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("PUSH", ops[0]);
+               
 
             }
             else if (ops.Length == 0 || args == "")
@@ -30,7 +30,7 @@ namespace WinFormsApp1
                 Config.memory[Config.USER_STACK] = Config.ACC;
                 Config.USER_STACK++;
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("PUSH");
+               
             }
             else
             {
@@ -51,7 +51,7 @@ namespace WinFormsApp1
 
                 Config.registers[regNum] = popped;
 
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("POP", ops[0]);
+               
             }
             else if(ops.Length == 0 || args == "")
             {
@@ -59,8 +59,6 @@ namespace WinFormsApp1
                 int popped = Config.memory[--Config.USER_STACK];
                 
                 Config.ACC = popped;
-
-                Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("POP");
 
             }
             else

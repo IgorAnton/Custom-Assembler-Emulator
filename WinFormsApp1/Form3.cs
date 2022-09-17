@@ -26,6 +26,7 @@ namespace WinFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             textBox1.ScrollBars = ScrollBars.Both;
+            textBox1.Clear();
 
             foreach (KeyValuePair<int, string> entry in Config.instrucitonsInBinary)
             {

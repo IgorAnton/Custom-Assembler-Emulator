@@ -10,7 +10,10 @@ namespace WinFormsApp1
         public Form1()
         {
             InitializeComponent();
+            
         }
+
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -83,8 +86,12 @@ namespace WinFormsApp1
 
         }
 
-        private void compile(String[] code)
+        
+
+        public  void compile(String[] code)
         {
+            
+
             int n = code.Length;
 
             for (int i = 0; i < n; i++)
@@ -98,7 +105,10 @@ namespace WinFormsApp1
                     s[0] = s[0].Trim().ToUpper();
                     s[1] = s[1].Trim();
                     Config.labels[s[0]] = i;
-                    code[i] = s[1];
+                    if (s[1] != null)
+                        code[i] = s[1];
+                    else
+                        code[i] = "";
                 }
             }
 
@@ -148,7 +158,7 @@ namespace WinFormsApp1
 
         }
 
-        private void buildCode()
+        public  void buildCode()
         {
             int n = richTextBox2.Lines.Count();
 
@@ -179,7 +189,7 @@ namespace WinFormsApp1
             Config.resetConfig();
             textBox2.Clear();
 
-           
+            buildCode();
 
             run();
             
@@ -394,8 +404,6 @@ namespace WinFormsApp1
 
         private void button6_Click(object sender, EventArgs e)
         {
-           
-
             buildCode();
         }
     }
