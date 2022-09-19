@@ -13,10 +13,10 @@ namespace WinFormsApp1
         public static int ACC = 0;
         public static int PC = 0x1000;
 
-        public static int[] memory = new int[65536];
+        public static int[] memory = new int[65536*100];
 
-        public static int SYS_STACK_BASE = 49152;
-        public static int SYS_STACK = 49152;
+        public static int SYS_STACK_BASE = 40000;
+        public static int SYS_STACK = 40000;
         public static int USER_STACK_BASE = 57344;
         public static int USER_STACK = 57344;
         public static bool ERROR_DETECTED = false;

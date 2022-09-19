@@ -27,6 +27,15 @@ namespace WinFormsApp1
         }
         
 
+        private static void makeLabel(ref String[] code,int i)
+        {
+            String[] s = code[i].Split(':', 2);
+            s[0] = s[0].Trim().ToUpper();
+            s[1] = s[1].Trim();
+            Config.labels[s[0]] = i;
+            code[i] = s[1];
+        }
+
         public void parse(String[] code)
         {
             int n = code.Length;
@@ -38,11 +47,7 @@ namespace WinFormsApp1
 
                 if (code[i].Contains(':'))
                 {
-                    String[] s = code[i].Split(':', 2);
-                    s[0] = s[0].Trim().ToUpper();
-                    s[1] = s[1].Trim();
-                    Config.labels[s[0]] = i;
-                    code[i] = s[1];
+                    makeLabel(ref code, i);
                 }
             }
 
@@ -62,10 +67,8 @@ namespace WinFormsApp1
         }
         private void run()
         {
-
             int n = richTextBox2.Lines.Count();
 
-           
             String[] code = new String[n];
             int j = 0;
             for (int i = 0; i < n; i++)
@@ -79,14 +82,8 @@ namespace WinFormsApp1
                 j++;
 
             }
-            
             parse(code);
-
-            
-
         }
-
-        
 
         public  void compile(String[] code)
         {
@@ -101,14 +98,7 @@ namespace WinFormsApp1
 
                 if (code[i].Contains(':'))
                 {
-                    String[] s = code[i].Split(':', 2);
-                    s[0] = s[0].Trim().ToUpper();
-                    s[1] = s[1].Trim();
-                    Config.labels[s[0]] = i;
-                    if (s[1] != null)
-                        code[i] = s[1];
-                    else
-                        code[i] = "";
+                    makeLabel(ref code, i);
                 }
             }
 
@@ -118,19 +108,16 @@ namespace WinFormsApp1
 
             for(; ind < n; ind++)
             {
-                if (code[ind] == null)
+                if (code[ind] == "" || code[ind] == null)
                     continue;
-             /*   if (code[ind] == "HALT")
-                {
-                    Config.instrucitonsInBinary[PC] = Memory.formZeroAddres("HALT");
+                
+                String[] s = new string[2];
+                s[0] = "";
+                s[1] = "";
 
-                    // break;
-                    continue;
-                }
-             */
-                String[] s = code[ind].Split(' ', 2);
+                s = code[ind].Split(' ', 2);
                 String[] ops = new string[1];
-                if (s.Length > 1)
+                if (s.Length > 1 && s[1] != "")
                 {
                      ops = s[1].Split(',');
 
@@ -217,11 +204,13 @@ namespace WinFormsApp1
             // get Last Index & Last Line from richTextBox1    
             int Last_Index = richTextBox2.GetCharIndexFromPosition(pt);
             int Last_Line = richTextBox2.GetLineFromCharIndex(Last_Index);
+            
             // set Center alignment to LineNumberTextBox    
             richTextBox3.SelectionAlignment = HorizontalAlignment.Center;
             // set LineNumberTextBox text to null & width to getWidth() function value    
             richTextBox3.Text = "";
             richTextBox3.Width = this.getWidth();
+            richTextBox3.Font = new Font("Courier New", 14, FontStyle.Bold);
             // now add each line number to LineNumberTextBox upto last line    
             for (int i = First_Line + 1; i < Last_Line + 2 ; i++) // 2
             {
@@ -244,7 +233,7 @@ namespace WinFormsApp1
             }
             else
             {
-                w = 50 + (int)richTextBox2.Font.Size;
+                w = 50 + (int)richTextBox2.Font.Size ;
             }
 
             return w;
@@ -293,7 +282,7 @@ namespace WinFormsApp1
                     richTextBox2.SelectionLength = token.Length;
                     richTextBox2.SelectionColor = Color.Black;
                     richTextBox2.SelectionFont = new Font("Courier New", 14, FontStyle.Regular);
-                    String[] keywords = { "qwer","wq    ewe" ,"ADD", "MOV", "SUB", "DIV","qqq" ,"MUL","CMP" ,"HALT", "MOD","weqwe" ,"JSR","RTS", "JUMP","LD","ST","PUSH", "CLR" ,"POP" ,"wwwww","INC", "DEC", "BEQ" ,"BNEQ" ,"BLSS" , "BGT","BGE","BLEQ", "AND", "OR" , "XOR" ,"LSH", "RSH"}; //dodati jos
+                    String[] keywords = {"ADD", "MOV", "SUB", "DIV" ,"MUL","CMP" ,"HALT", "MOD","JSR","RTS", "JUMP","LD","ST","PUSH", "CLR" ,"POP" ,"INC", "DEC", "BEQ" ,"BNEQ" ,"BLSS" , "BGT","BGE","BLEQ", "AND", "OR" , "XOR" ,"LSH", "RSH"}; //dodati jos
 
                     for (int i = 0; i < keywords.Length; i++)
                     {
