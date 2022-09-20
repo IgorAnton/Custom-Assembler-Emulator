@@ -25,6 +25,8 @@ namespace WinFormsApp1
 
         private void Form3_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             textBox1.ScrollBars = ScrollBars.Both;
             textBox1.Clear();
 

@@ -319,7 +319,7 @@ namespace WinFormsApp1
                         }
 
                         Config.instrucitonsInBinary[Config.PC] = Memory.formZeroAddres("HALT");
-
+                        Config.PC -= 4;
                         break;
                     }
                 

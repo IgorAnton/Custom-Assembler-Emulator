@@ -167,7 +167,24 @@ namespace WinFormsApp1
 
         public static String formTwoAddres(String name,String register1,String register2)
         {
-            return " | " + formFirstByte(name, 2) + " " + formByte(register1) + " " + formByte(register2) + " " + "".PadLeft(8, '0') + " | ";
+            string op = formByte(register2);
+            string temp = op;
+            String op1;
+            String op2;
+            int n = op.Length;
+            if (n <= 8)
+            {
+                return " | " + formFirstByte(name, 2) + " " + formByte(register1) + " " + formByte(register2) + " " + "".PadLeft(8, '0') + " | ";
+            }
+            else
+            {
+                op1 = op.Substring(0, n-8).PadLeft(8,'0');
+                op2 = temp.Substring(n-8,8).PadLeft(8, '0');
+
+                return " | " + formFirstByte(name, 2) + " " + formByte(register1) + " " + op1 + " " + op2 + " | ";
+            }
+
+           
 
         }
 

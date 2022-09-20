@@ -30,7 +30,12 @@ namespace WinFormsApp1
 
                 if (ops[1][0] >= '0' && ops[1][0] <='9')
                      OP = Convert.ToInt32(ops[1]);
+                else
+                {
+                    int reg = Config.getReg(ops[1]);
 
+                    OP = Config.memory[reg];
+                }
                 Config.setReg(ops[0], OP);
 
                
@@ -61,9 +66,8 @@ namespace WinFormsApp1
                 int OP1 = Config.getReg(ops[1]);
                 int OP2 = Config.getReg(ops[0]);
 
-                Config.memory[OP2] = OP1;
+                Config.memory[OP1] = OP2;
 
-                
 
             }
             if(ops.Length == 1)
@@ -71,8 +75,6 @@ namespace WinFormsApp1
                 int OP1 = Config.getReg(ops[0]);
 
                 Config.memory[OP1] = Config.ACC;
-
-                Config.instrucitonsInBinary[Config.PC] = Memory.formOneAddres("ST", ops[0]);
 
             }
         }

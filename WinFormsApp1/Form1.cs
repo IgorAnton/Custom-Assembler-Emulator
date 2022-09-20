@@ -17,6 +17,7 @@ namespace WinFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             richTextBox3.Font = richTextBox2.Font;
             richTextBox2.Select();
@@ -68,6 +69,11 @@ namespace WinFormsApp1
         private void run()
         {
             int n = richTextBox2.Lines.Count();
+
+            if(n == 0)
+            {
+                return;
+            }
 
             String[] code = new String[n];
             int j = 0;

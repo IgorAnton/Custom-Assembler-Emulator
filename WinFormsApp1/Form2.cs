@@ -19,6 +19,7 @@ namespace WinFormsApp1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             textBox1.Text = Config.registers[0].ToString();
             textBox2.Text = Config.registers[1].ToString();
@@ -56,7 +57,7 @@ namespace WinFormsApp1
 
 
             textBox33.Text = Config.ACC.ToString();
-            textBox34.Text = "0x"+Convert.ToString(Config.PC-4,16);
+            textBox34.Text = "0x"+Convert.ToString(Config.PC,16);
 
             textBox35.Text = Convert.ToString(Config.NZCV, 2).PadLeft(4,'0');
             textBox36.Text = Config.USER_STACK.ToString();
