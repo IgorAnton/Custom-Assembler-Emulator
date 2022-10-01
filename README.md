@@ -36,7 +36,7 @@ Branch and Jump instructions store the label address begenign from the lowest bi
 # Configuration of Emulator System
 <br />
 Emulated System has:
-
+<br />
 1. 32 General Purpose Registers (32bit Registers). <br />
 2. Accumulator Register
 3. PC Register
@@ -47,8 +47,8 @@ Emulated System has:
 8. Run Option
 9. User Stack
 10. System Stack
-11. 65536 KB of RAM
-12. 65536 KB of ROM
+11. 262144 KB of RAM
+12. 262144 KB of ROM
 <br />
 
 
