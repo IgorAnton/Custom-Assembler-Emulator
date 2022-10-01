@@ -8,7 +8,9 @@
 
 # Overview 
 
-A RISC Based Assembler Emulator. Instruction set contains 28 different instructions divided into 4 categories.
+A RISC Based Assembler Emulator. 
+<br />
+Instruction set contains 28 different instructions divided into 4 categories.
 Instruction categories are as follows: 
 
 1. Arithmetic Instructions (ADD, SUB, MUL, DIV, MOD, INC, DEC)
