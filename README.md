@@ -16,10 +16,10 @@ Instruction categories are as follows:
 
 There are 4 types of instructions:
 
-Zero Operands   -   Instructions operate with Accumulator, result is stored into Accumulator
-One Operands    -   Instructions operate with one register, result is stored into that one register
-Two Operands    -   Instructions operate with two register, result is stored into first register
-Three Operands  -   Instructions operate with three register, result is stored into first register
+1. Zero Operands   -   Instructions operate with Accumulator, result is stored into Accumulator
+2. One Operands    -   Instructions operate with one register, result is stored into that one register
+3. Two Operands    -   Instructions operate with two register, result is stored into first register
+4. Three Operands  -   Instructions operate with three register, result is stored into first register
 
 # Configuration
 
