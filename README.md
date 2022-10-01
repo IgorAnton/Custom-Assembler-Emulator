@@ -47,14 +47,20 @@ Emulated System has:
 4. SP Register
 5. NZCV Register
 6. Memory View
-7. Build Option
-8. Run Option
-9. User Stack
-10. System Stack
-11. 262144 KB of RAM
-12. 262144 KB of ROM
+7. Register View
+8. Build Option
+9. Run Option
+10. User Stack
+11. System Stack
+12. 262144 KB of RAM
+13. 262144 KB of ROM
 <br />
 
+# Memory Layout
+
+Instructions are stored Into RAM begining from 0x1000 (PC). All instructions are aligned to 4 bytes. Every Instruction has Side Effect of incrementing PC by 4.<br />
+RAM is divided into several regions.<br />
+First region is System Stack. System Stack is only used when Jumping to Subroutines (JSR instruction - See Branch and Jump Instructions). This allows nested and recursive subroutine cals, because PC and NZCV registers are stored onto this stack.<br />
 
 
 
