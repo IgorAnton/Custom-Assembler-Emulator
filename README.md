@@ -26,7 +26,7 @@ There are 4 types of instructions:
 
 # Instruction format
 
-All instructions are aligned to 4 bytes (32bit).\
+All instructions are aligned to 4 bytes (32bit).<br />
 
 First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
 Depending on the type of the instruction the rest of the bytes are used for operands. 
