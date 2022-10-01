@@ -23,13 +23,20 @@ There are 4 types of instructions:
 2. One Operands    -   Instructions operate with one register, result is stored into that one register
 3. Two Operands    -   Instructions operate with two register, result is stored into first register
 4. Three Operands  -   Instructions operate with three register, result is stored into first register
+<br />
 
 # Instruction format
 
 All instructions are aligned to 4 bytes (32bit).<br />
 
 First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
-Depending on the type of the instruction the rest of the bytes are used for operands. 
+Depending on the type of the instruction the rest of the bytes are used for operands. <br />
+Branch and Jump instructions store the label address begenign from the lowest bit( rightmost bit/ bit 31)<br />
+<br />
+# Configuration of Emulator System
+
+
+
 
 
 
