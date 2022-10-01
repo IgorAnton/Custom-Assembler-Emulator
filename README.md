@@ -31,9 +31,24 @@ All instructions are aligned to 4 bytes (32bit).<br />
 
 First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
 Depending on the type of the instruction the rest of the bytes are used for operands. <br />
-Branch and Jump instructions store the label address begenign from the lowest bit( rightmost bit/ bit 31)<br />
+Branch and Jump instructions store the label address begenign from the lowest bit( rightmost bit)<br />
 <br />
 # Configuration of Emulator System
+<br />
+Emulated System has:
+1. 32 General Purpose Registers (32bit Registers). <br />
+2. Accumulator Register
+3. PC Register
+4. SP Register
+5. NZCV Register
+6. Memory View
+7. Build Option
+8. Run Option
+9. User Stack
+10. System Stack
+11. 65536 KB of RAM
+12. 65536 KB of ROM
+<br />
 
 
 
