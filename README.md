@@ -35,6 +35,7 @@ Branch and Jump instructions store the label address begenign from the lowest bi
 <br />
 # Configuration of Emulator System
 <br />
+
 Emulated System has:
 
 
