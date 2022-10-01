@@ -58,6 +58,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(709, 576);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
+            
             // 
             // textBox1
             // 
@@ -67,6 +68,7 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(709, 156);
             this.textBox1.TabIndex = 1;
+            
             // 
             // button1
             // 
