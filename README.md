@@ -36,7 +36,8 @@ Branch and Jump instructions store the label address begenign from the lowest bi
 # Configuration of Emulator System
 <br />
 Emulated System has:
-<br />
+
+
 1. 32 General Purpose Registers (32bit Registers). <br />
 2. Accumulator Register
 3. PC Register
