@@ -1,6 +1,8 @@
 # Custom Assembler Emulator
 
-
+\
+\
+\
 
 
 # Overview 
@@ -21,6 +23,11 @@ There are 4 types of instructions:
 3. Two Operands    -   Instructions operate with two register, result is stored into first register
 4. Three Operands  -   Instructions operate with three register, result is stored into first register
 
-# Configuration
+# Instruction format
 
-All instructions are aligned to 4 bytes (32bit).
+All instructions are aligned to 4 bytes (32bit).\
+
+First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
+Depending on the type of the instruction the rest of the bytes are used for operands.\
+
+
