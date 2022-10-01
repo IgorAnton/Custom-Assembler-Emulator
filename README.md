@@ -13,3 +13,14 @@ Instruction categories are as follows:
 3. Registers Instruction (LD, ST, MOV, CLR)
 4. Branch and Jump Instructions (JUMP, BEQ, BLSS, BGT, BGE, BLEQ, BNEQ, JSR, RTS)
 5. Stack Instructions (PUSH, POP)
+
+There are 4 types of instructions:
+
+Zero Operands   -   Instructions operate with Accumulator, result is stored into Accumulator
+One Operands    -   Instructions operate with one register, result is stored into that one register
+Two Operands    -   Instructions operate with two register, result is stored into first register
+Three Operands  -   Instructions operate with three register, result is stored into first register
+
+# Configuration
+
+All instructions are aligned to 4 bytes (32bit).
