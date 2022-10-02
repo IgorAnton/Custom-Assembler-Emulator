@@ -203,7 +203,8 @@ There is also ROM.<br />
   The Second is the format where you can load value from the memory into specified register. The Memory Address is
   located in second Register specified in instruction
     
-    OP CODE:
+   OP CODE:
+   
     LD <-> 110000
 
 
@@ -214,7 +215,8 @@ There is also ROM.<br />
   Store Instruction is used for storing Register values specified in first operand into memory location which address is stored in second register. Instruction can store Accumulator value if you only use one operand, then the address is in that specified Register.
   
     
-    OP CODE:
+   OP CODE:
+   
     ST <-> 110001
   
  Move Instruction
@@ -223,10 +225,22 @@ There is also ROM.<br />
  Mnemonic for this Instruction is MOV.
  Move Instruction moves value from the Register specified in second operadn to Register specified in first operand. Insturction can move a value into Accumulator if it only has one operand.
  
-    OP CODE:
+   OP CODE:
+   
     MOV <-> 110010
   
+ Move Instruction
+ -----------------------
+ 
+ Mnemonic for this Instruction is CLR.
+ Clear Instruction clears Register, ie. it sets specified Reigster to 0. Instruction can clear Accumulator if it does not have any operands (Zero Address).
+ 
+   OP CODE:
+   
+    CLR <-> 110011
   
+  
+
   
   
   
