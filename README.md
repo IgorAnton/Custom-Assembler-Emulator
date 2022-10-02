@@ -14,7 +14,7 @@ Instruction set contains 28 different instructions divided into 4 categories.
 Instruction categories are as follows: 
 
 1. Arithmetic Instructions (ADD, SUB, MUL, DIV, MOD, INC, DEC)
-2. Logical Instructions (AND, OR, XOR, LSH, RSH, CMP)
+2. Logic Instructions (AND, OR, XOR, LSH, RSH, CMP)
 3. Registers Instruction (LD, ST, MOV, CLR)
 4. Branch and Jump Instructions (JUMP, BEQ, BLSS, BGT, BGE, BLEQ, BNEQ, JSR, RTS)
 5. Stack Instructions (PUSH, POP)
@@ -27,6 +27,7 @@ There are 4 types of instructions:
 4. Three Operands  -   Instructions operate with three register, result is stored into first register
 
 <br />
+
 # Instruction format
 
 All instructions are aligned to 4 bytes (32bit).<br />
@@ -54,7 +55,7 @@ Instruction Format in Binary: <br />
 
   <br />
   <br />
-First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
+First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).<br />
 Depending on the type of the instruction the rest of the bytes are used for operands. <br />
 Branch and Jump instructions store the label address begenign from the lowest bit( rightmost bit)<br />
 <br />
@@ -82,9 +83,13 @@ Emulated System has:
 
 # Memory Layout
 
-Instructions are stored Into RAM begining from 0x1000 (PC). All instructions are aligned to 4 bytes. Every Instruction has Side Effect of incrementing PC by 4.<br />
+Instructions are stored Into RAM begining from 0x1000 (PC). All instructions are aligned to 4 bytes. Every Instruction has Side Effect of incrementing PC by 4. Memory can only be accessed via Load (LD) and Store (ST) instructions.<br />
 RAM is divided into several regions.<br />
 First region is System Stack.  System Stack is only used when Jumping to Subroutines (JSR instruction - See Branch and Jump Instructions). This allows nested and recursive subroutine cals, because PC and NZCV registers are stored onto this stack.<br />
+Second region is User Stack. User Stack can be accesd via PUSH and POP instrcutions, hence it's User Stack because user can alter Stack.<br />
+Both Stacks grow towards higher addresses. <br />
+Third region is the rest of the RAM. It is multifuncional region.<br />
+There is also ROM.<br />
 
 # Arithmetic Instructions
 
@@ -111,6 +116,70 @@ First region is System Stack.  System Stack is only used when Jumping to Subrout
       INC <-> 001101
       DEC <-> 001110
 
-  All Arithmetic Instructions can affect NZCV Register.
+  All Arithmetic Instructions can affect NZCV Register. <br />
+  
+  # Logic Instructions
+  
+  Logic Instructions can be of all four types (Zero, One, Two, Three Address), except CMP (One and Two Address). <br />
+  Logic Instructions are as follows:                                                                            
+  1. Bitwise And - AND
+  2. Bitwise Or - OR
+  3. Bitwise Exclusive Or - XOR
+  4. Logic Left Shift - LSH
+  5. Arithmetic Right Shift - RSH
+  6. Compare - CMP
+  
+  All Logic Instructions Operation Codes start with three leftmost bits being 000, rest of the bits are indicators. <br />
+  
+  OP CODES:
+  
+      AND <-> 000001
+      OR  <-> 000010
+      XOR <-> 000011
+      CMP <-> 000100
+      LSH <-> 000101
+      RSH <-> 000110
+  
+  All Logic Instructions can affect NZCV Register. <br />
+  CMP Instruction ONLY affects NZCV Register. <br />
+  
+  # Jump And Branch Instructions
+  
+  
+  Jump and Branch Instructions have purpose to jump to certain address given by a Label. <br />
+  Jump and Branch Instructions only change the PC value by writing in it the address of a Label in the Instruction. <br />
+  Jump Instrcution is unconditional Instruction. <br />
+  Branch Instrctuons must satisfy certain condition before branching to the Label. <br />
+  Jump to Subroutine (JSR) Instruction jumps to Addres giben by a Label in a Instruction and saves NZCV and PC Registers to System Stack. <br />
+  Return from Subroutine (RTS) Instruction returns to the Next Instruction after the JSR Instruction call. RTS pops from System Stack NZCV and PC Registers. <br />
+  
+  Jump And Branch Instructions are as follows: 
+  
+  1. JUMP - Unconditional Jump to Label
+  2. BEQ  - Branch if Equal (ZF = 1)
+  3. BLSS - Branch if Less
+  4. BGT  - Branch if Greater
+  5. BGE  - Branch if Greater or Equal
+  6. BLEQ - Branch if Less or Equal
+  7. BNEQ - Branch if Not Equal
+  8. JSR  - Jump To Subroutine
+  9. RTS  - Return From Subroutine
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
