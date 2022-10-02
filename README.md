@@ -263,7 +263,16 @@ There is also ROM.<br />
       PUSH  <->  100001
 
   
+  # HALT instrcution
   
+  HALT instruction has purpose to halt (stops) the program. <br />
+  HALT instruction is necessary to every program. Without it program won't finish executing. <br />
+  HALT instruction does not have any operands <br />
+  
+  OP CODE:
+      
+      HALT  <-> 111111
+    
   
   
   
