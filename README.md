@@ -169,7 +169,10 @@ There is also ROM.<br />
   <br />
   
   Jump And Branch Instructions containt only OP CODE and Label address wich is stored starting from the leftmost bit in the Instrctuion Word. <br />
-  All of the Jump And Branch Instructions begin with first two rightmost bits being 01, rest of the bits are indicators. <br />
+  All of the Jump And Branch Instructions begin with first two rightmost bits being 01, rest of the bits are indicators.
+  <br />
+  
+  
   OP CODES:
       
       JUMP  <-> 010000
