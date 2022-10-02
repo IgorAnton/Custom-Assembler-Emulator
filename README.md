@@ -25,20 +25,40 @@ There are 4 types of instructions:
 2. One Operands    -   Instructions operate with one register, result is stored into that one register
 3. Two Operands    -   Instructions operate with two register, result is stored into first register
 4. Three Operands  -   Instructions operate with three register, result is stored into first register
-<br />
 
-Instruction format: <br />
-
-< INSTRUCTION NAME >  < OPERAND1 [opt] > ,   < OPERAND2[opt] > ,  < OPERAND3[opt] >
 <br />
 # Instruction format
 
 All instructions are aligned to 4 bytes (32bit).<br />
 
+<br />
+
+Instruction Format: <br />
+
+< INSTRUCTION NAME >  < OPERAND1 [opt] > ,   < OPERAND2 [opt] > ,  < OPERAND3 [opt] >
+<br />
+
+Branch and Jump Instructions Format: <br />
+
+< INSTRUCTION NAME > < LABEL >
+
+Instruction Format in Binary: <br />
+
+| < [OP_CODE(6bit)] [TYPE(2bit)] > | < FIRST OPERAND > | < SECOND OPERAND > | <THIRD OPERAND> 
+
+  
+  
+  Branch and Jump Instructions Format in Binary: 
+  
+| < [OP_CODE(6bit)] [00] >  | < PADDING TO 32 BITS > | < LABEL ADDRESS > |
+
+  <br />
+  <br />
 First byte of the instruction contains the OPCODE for the instruction (higher 6 bits) and type of instrcution (lower 2 bits).\
 Depending on the type of the instruction the rest of the bytes are used for operands. <br />
 Branch and Jump instructions store the label address begenign from the lowest bit( rightmost bit)<br />
 <br />
+  
 # Configuration of Emulator System
 <br />
 
@@ -66,7 +86,31 @@ Instructions are stored Into RAM begining from 0x1000 (PC). All instructions are
 RAM is divided into several regions.<br />
 First region is System Stack.  System Stack is only used when Jumping to Subroutines (JSR instruction - See Branch and Jump Instructions). This allows nested and recursive subroutine cals, because PC and NZCV registers are stored onto this stack.<br />
 
+# Arithmetic Instructions
 
 
+  Aritihmetic Instructions can be of all four types (Zero, One, Two, Three Address), except INC and DEC (Zero and One Address).<br />
+  Arithmetic Instructions are as follows:
+  1. Addition - ADD
+  2. Subtraction - SUB
+  3. Multiplication - MUL
+  4. Division - DIV
+  5. Modulo - MOD
+  6. Increse By One - INC
+  7. Decrese By One - DEC
 
+  All Arithmetic Instructions Operation Codes start with three leftmost bits being 001, rest of the bits are indicators. <br />
+  
+  OP CODES:
+      
+      ADD <-> 001000
+      SUB <-> 001001
+      MUL <-> 001010
+      DIV <-> 001011
+      MOD <-> 001100
+      INC <-> 001101
+      DEC <-> 001110
 
+  All Arithmetic Instructions can affect NZCV Register.
+  
+  
