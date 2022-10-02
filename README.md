@@ -244,6 +244,23 @@ There is also ROM.<br />
     CLR <-> 110011
   
   
+  # Stack Instructions
+  
+  Stack Instructions have purpose of accessing User Stack (See Memory Layout). <br />
+  Stack Instructions can be either One Addres or Zero Address. One Addres Type have one operand that specifies wich Register is used. Zero Addres Type does not have any operands specified, rather it uses Accumulator as designated Operand. <br />
+  Stack Instructions are as follows :
+  
+  1. POP  - Pops value from the top of the User Stack
+  2. PUSH - Pushes value to the top of the User Stack
+
+  Stack Instructions have side effects of increasing/decresing value of SP register. <br />
+  All Stack Instructions Operation Codes start with three leftmost bits being 100, rest of the bits are indicators. <br />
+
+
+  OP CODES:
+    
+      POP   <->  100000
+      PUSH  <->  100001
 
   
   
