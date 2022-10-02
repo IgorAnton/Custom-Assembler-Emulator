@@ -149,7 +149,7 @@ There is also ROM.<br />
   
   Jump and Branch Instructions have purpose to jump to certain address given by a Label. <br />
   Jump and Branch Instructions only change the PC value by writing in it the address of a Label in the Instruction. <br />
-  Jump Instrcution is unconditional Instruction. <br />
+  Jump Instrcution is unconditional Jump Instruction. <br />
   Branch Instrctuons must satisfy certain condition before branching to the Label. <br />
   Jump to Subroutine (JSR) Instruction jumps to Addres giben by a Label in a Instruction and saves NZCV and PC Registers to System Stack. <br />
   Return from Subroutine (RTS) Instruction returns to the Next Instruction after the JSR Instruction call. RTS pops from System Stack NZCV and PC Registers. <br />
