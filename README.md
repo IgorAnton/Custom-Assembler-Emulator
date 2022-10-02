@@ -27,6 +27,10 @@ There are 4 types of instructions:
 4. Three Operands  -   Instructions operate with three register, result is stored into first register
 <br />
 
+Instruction format: <br />
+
+< INSTRUCTION NAME >  < OPERAND1 [opt] > ,   < OPERAND2[opt] > ,  < OPERAND3[opt] >
+<br />
 # Instruction format
 
 All instructions are aligned to 4 bytes (32bit).<br />
