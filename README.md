@@ -41,22 +41,21 @@ All instructions are aligned to 4 bytes (32bit).<br />
 
 Instruction Format: <br />
 
-< INSTRUCTION NAME >  < OPERAND1 [opt] > ,   < OPERAND2 [opt] > ,  < OPERAND3 [opt] >
-<br />
+    < INSTRUCTION NAME >  < OPERAND1 [opt] > ,   < OPERAND2 [opt] > ,  < OPERAND3 [opt] >
 
 Branch and Jump Instructions Format: <br />
 
-< INSTRUCTION NAME > < LABEL >
+    < INSTRUCTION NAME > < LABEL >
 
 Instruction Format in Binary: <br />
 
-| < [OP_CODE(6bit)] [TYPE(2bit)] > | < FIRST OPERAND > | < SECOND OPERAND > | < THIRD OPERAND > |
+    | < [OP_CODE(6bit)] [TYPE(2bit)] > | < FIRST OPERAND > | < SECOND OPERAND > | < THIRD OPERAND > |
 
   
   
   Branch and Jump Instructions Format in Binary: 
   
-| < [OP_CODE(6bit)] [00] >  | < PADDING TO 32 BITS > | < LABEL ADDRESS > |
+    | < [OP_CODE(6bit)] [00] >  | < PADDING TO 32 BITS > | < LABEL ADDRESS > |
 
   <br />
   <br />
