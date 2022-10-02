@@ -45,7 +45,7 @@ Branch and Jump Instructions Format: <br />
 
 Instruction Format in Binary: <br />
 
-| < [OP_CODE(6bit)] [TYPE(2bit)] > | < FIRST OPERAND > | < SECOND OPERAND > | <THIRD OPERAND> |
+| < [OP_CODE(6bit)] [TYPE(2bit)] > | < FIRST OPERAND > | < SECOND OPERAND > | < THIRD OPERAND > |
 
   
   
