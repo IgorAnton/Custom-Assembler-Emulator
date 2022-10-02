@@ -14,7 +14,7 @@ Custom RISC Assembler Emulator with numerous functionalities.
 
 A RISC Based Assembler Emulator. 
 <br />
-Instruction set contains 28 different instructions divided into 4 categories.
+Instruction set contains 29 different instructions divided into 4 categories.
 Instruction categories are as follows: 
 
 1. Arithmetic Instructions (ADD, SUB, MUL, DIV, MOD, INC, DEC)
@@ -22,6 +22,7 @@ Instruction categories are as follows:
 3. Transfer And Registers Instruction (LD, ST, MOV, CLR)
 4. Branch and Jump Instructions (JUMP, BEQ, BLSS, BGT, BGE, BLEQ, BNEQ, JSR, RTS)
 5. Stack Instructions (PUSH, POP)
+6. HALT instruction (HALT)
 
 There are 4 types of instructions:
 
