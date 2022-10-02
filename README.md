@@ -131,6 +131,7 @@ There is also ROM.<br />
   
   All Logic Instructions Operation Codes start with three leftmost bits being 000, rest of the bits are indicators. <br />
   
+  
   OP CODES:
   
       AND <-> 000001
