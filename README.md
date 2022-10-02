@@ -15,7 +15,7 @@ Instruction categories are as follows:
 
 1. Arithmetic Instructions (ADD, SUB, MUL, DIV, MOD, INC, DEC)
 2. Logic Instructions (AND, OR, XOR, LSH, RSH, CMP)
-3. Registers Instruction (LD, ST, MOV, CLR)
+3. Transfer And Registers Instruction (LD, ST, MOV, CLR)
 4. Branch and Jump Instructions (JUMP, BEQ, BLSS, BGT, BGE, BLEQ, BNEQ, JSR, RTS)
 5. Stack Instructions (PUSH, POP)
 
@@ -188,11 +188,43 @@ There is also ROM.<br />
   
   
   
+  # Transfer And Register Instructions
   
   
+ Transfer And Register Instructions can be divided into two categories.  First category are the Instructions that can operate with memory( LD, ST) and Second Category are the Instructions that operate directly with General Purpose Registers and Accumulator (LD immidiet, MOV, CLR ). <br />
+ Instructions from this Category start with three leftmost bits beeing 110, the remaining bits are the indicators. <br />
+ 
+ Load Instruction
+ -----------------------
   
+  Mnemonic for this Instruction is LD. 
+  There are two formats of Load Instruction. The First is the format wher you can load immidet value into specified 
+  Register or Accumulator(depending on the Type of instruction). 
+  The Second is the format where you can load value from the memory into specified register. The Memory Address is
+  located in second Register specified in instruction
+    
+    OP CODE:
+    LD <-> 110000
+
+
+ Store Instruction
+ -----------------------
+ 
+  Mnemonic for this Instruction is ST. 
+  Store Instruction is used for storing Register values specified in first operand into memory location which address is stored in second register. Instruction can store Accumulator value if you only use one operand, then the address is in that specified Register.
   
+    
+    OP CODE:
+    ST <-> 110001
   
+ Move Instruction
+ -----------------------
+ 
+ Mnemonic for this Instruction is MOV.
+ Move Instruction moves value from the Register specified in second operadn to Register specified in first operand. Insturction can move a value into Accumulator if it only has one operand.
+ 
+    OP CODE:
+    MOV <-> 110010
   
   
   
