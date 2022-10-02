@@ -155,17 +155,31 @@ There is also ROM.<br />
   
   Jump And Branch Instructions are as follows: 
   
-  1. JUMP - Unconditional Jump to Label
-  2. BEQ  - Branch if Equal (ZF = 1)
-  3. BLSS - Branch if Less
-  4. BGT  - Branch if Greater
-  5. BGE  - Branch if Greater or Equal
-  6. BLEQ - Branch if Less or Equal
-  7. BNEQ - Branch if Not Equal
+  1. JUMP - Unconditional Jump
+  2. BEQ  - Branch if Equal (ZF == 1)
+  3. BLSS - Branch if Less (CF == 1 ^ NF == 1)
+  4. BGT  - Branch if Greater ( (NF == 1 ^ VF == 1) | ZF == 1 )
+  5. BGE  - Branch if Greater or Equal (NF == 1 ^ VF == 1)
+  6. BLEQ - Branch if Less or Equal ( !((NF == 1 ^ VF == 1) | ZF == 1) )
+  7. BNEQ - Branch if Not Equal (ZF == 0)
   8. JSR  - Jump To Subroutine
   9. RTS  - Return From Subroutine
   
+  <br />
   
+  Jump And Branch Instructions containt only OP CODE and Label address wich is stored starting from the leftmost bit in the Instrctuion Word. <br />
+  All of the Jump And Branch Instructions begin with first two rightmost bits being 01, rest of the bits are indicators. <br />
+  OP CODES:
+      
+      JUMP  <-> 010000
+      BEQ   <-> 010001
+      BLSS  <-> 010010
+      BGT   <-> 010011
+      BGE   <-> 010100
+      BLEQ  <-> 010101
+      BNEQ  <-> 010110
+      JSR   <-> 010111
+      RTS   <-> 011000
   
   
   
