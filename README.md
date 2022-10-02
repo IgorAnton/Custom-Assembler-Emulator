@@ -1,9 +1,13 @@
 # Custom Assembler Emulator
 
 <br />
+
+
+Custom RISC Assembler Emulator with numerous functionalities.
+
 <br />
 
-
+![Table](images/overview1.jpg)
 
 
 # Overview 
