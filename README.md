@@ -233,7 +233,7 @@ There is also ROM.<br />
    
     MOV <-> 110010
   
- Move Instruction
+ Clear Instruction
  -----------------------
  
  Mnemonic for this Instruction is CLR.
