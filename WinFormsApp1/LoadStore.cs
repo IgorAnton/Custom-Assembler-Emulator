@@ -28,8 +28,8 @@ namespace WinFormsApp1
             {
                 int OP = 0;
 
-                if (ops[1][0] >= '0' && ops[1][0] <='9')
-                     OP = Convert.ToInt32(ops[1]);
+                if (ops[1].ToUpper().Contains('X'))
+                     OP = Convert.ToInt32(ops[1],16);
                 else
                 {
                     int reg = Config.getReg(ops[1]);

@@ -115,7 +115,7 @@ namespace WinFormsApp1
                 int regNum = 0;
                 if (reg[0] != 'R')
                 {
-                    regNum = Convert.ToInt32(reg);
+                    regNum = Convert.ToInt32(reg,16);
                 }
                 else
                 {

@@ -288,7 +288,7 @@ namespace WinFormsApp1
                     richTextBox2.SelectionLength = token.Length;
                     richTextBox2.SelectionColor = Color.Black;
                     richTextBox2.SelectionFont = new Font("Courier New", 14, FontStyle.Regular);
-                    String[] keywords = {"ADD", "MOV", "SUB", "DIV" ,"MUL","CMP" ,"HALT", "MOD","JSR","RTS", "JUMP","LD","ST","PUSH", "CLR" ,"POP" ,"INC", "DEC", "BEQ" ,"BNEQ" ,"BLSS" , "BGT","BGE","BLEQ", "AND", "OR" , "XOR" ,"LSH", "RSH"}; //dodati jos
+                    String[] keywords = {"qwe", "ADD", "MOV", "SUB", "DIV" ,"MUL","CMP" ,"HALT", "MOD","JSR","RTS", "JUMP","LD","ST","PUSH", "CLR" ,"POP" ,"INC", "DEC", "BEQ" ,"BNEQ" ,"BLSS" , "BGT","BGE","BLEQ", "AND", "OR" , "XOR" ,"LSH", "RSH"}; //dodati jos
 
                     for (int i = 0; i < keywords.Length; i++)
                     {

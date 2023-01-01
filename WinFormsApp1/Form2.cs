@@ -21,42 +21,42 @@ namespace WinFormsApp1
         {
             this.MaximizeBox = false;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            textBox1.Text = Config.registers[0].ToString();
-            textBox2.Text = Config.registers[1].ToString();
-            textBox3.Text = Config.registers[2].ToString();
-            textBox4.Text = Config.registers[3].ToString();
-            textBox5.Text = Config.registers[4].ToString();
-            textBox6.Text = Config.registers[5].ToString();
-            textBox7.Text = Config.registers[6].ToString();
-            textBox8.Text = Config.registers[7].ToString();
-            textBox9.Text = Config.registers[8].ToString();
-            textBox10.Text = Config.registers[9].ToString();
-            textBox11.Text = Config.registers[10].ToString();
-            textBox12.Text = Config.registers[11].ToString();
-            textBox13.Text = Config.registers[12].ToString();
-            textBox14.Text = Config.registers[13].ToString();
-            textBox15.Text = Config.registers[14].ToString();
-            textBox16.Text = Config.registers[15].ToString();
+            textBox1.Text = "0x"+ Config.registers[0].ToString("x");
+            textBox2.Text = "0x" + Config.registers[1].ToString("x");
+            textBox3.Text = "0x" + Config.registers[2].ToString("x");
+            textBox4.Text = "0x" + Config.registers[3].ToString("x");
+            textBox5.Text = "0x" + Config.registers[4].ToString("x");
+            textBox6.Text = "0x" + Config.registers[5].ToString("x");
+            textBox7.Text = "0x" + Config.registers[6].ToString("x");
+            textBox8.Text = "0x" + Config.registers[7].ToString("x");
+            textBox9.Text = "0x" + Config.registers[8].ToString("x");
+            textBox10.Text = "0x" + Config.registers[9].ToString("x");
+            textBox11.Text = "0x" + Config.registers[10].ToString("x");
+            textBox12.Text = "0x" + Config.registers[11].ToString("x");
+            textBox13.Text = "0x" + Config.registers[12].ToString("x");
+            textBox14.Text = "0x" + Config.registers[13].ToString("x");
+            textBox15.Text = "0x" + Config.registers[14].ToString("x");
+            textBox16.Text = "0x" + Config.registers[15].ToString("x");
 
-            textBox17.Text = Config.registers[31].ToString();
-            textBox18.Text = Config.registers[30].ToString();
-            textBox19.Text = Config.registers[29].ToString();
-            textBox20.Text = Config.registers[28].ToString();
-            textBox21.Text = Config.registers[27].ToString();
-            textBox22.Text = Config.registers[26].ToString();
-            textBox23.Text = Config.registers[25].ToString();
-            textBox24.Text = Config.registers[24].ToString();
-            textBox25.Text = Config.registers[23].ToString();
-            textBox26.Text = Config.registers[22].ToString();
-            textBox27.Text = Config.registers[21].ToString();
-            textBox28.Text = Config.registers[20].ToString();
-            textBox29.Text = Config.registers[19].ToString();
-            textBox30.Text = Config.registers[18].ToString();
-            textBox31.Text = Config.registers[17].ToString();
-            textBox32.Text = Config.registers[16].ToString();
+            textBox17.Text = "0x" + Config.registers[31].ToString("x");
+            textBox18.Text = "0x" + Config.registers[30].ToString("x");
+            textBox19.Text = "0x" + Config.registers[29].ToString("x");
+            textBox20.Text = "0x" + Config.registers[28].ToString("x");
+            textBox21.Text = "0x" + Config.registers[27].ToString("x");
+            textBox22.Text = "0x" + Config.registers[26].ToString("x");
+            textBox23.Text = "0x" + Config.registers[25].ToString("x");
+            textBox24.Text = "0x" + Config.registers[24].ToString("x");
+            textBox25.Text = "0x" + Config.registers[23].ToString("x");
+            textBox26.Text = "0x" + Config.registers[22].ToString("x");
+            textBox27.Text = "0x" + Config.registers[21].ToString("x");
+            textBox28.Text = "0x" + Config.registers[20].ToString("x");
+            textBox29.Text = "0x" + Config.registers[19].ToString("x");
+            textBox30.Text = "0x" + Config.registers[18].ToString("x");
+            textBox31.Text = "0x" + Config.registers[17].ToString("x");
+            textBox32.Text = "0x" + Config.registers[16].ToString("x");
 
 
-            textBox33.Text = Config.ACC.ToString();
+            textBox33.Text = "0x" + Config.ACC.ToString("x");
             textBox34.Text = "0x"+Convert.ToString(Config.PC,16);
 
             textBox35.Text = Convert.ToString(Config.NZCV, 2).PadLeft(4,'0');
@@ -109,6 +109,11 @@ namespace WinFormsApp1
         }
 
         private void textBox36_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
